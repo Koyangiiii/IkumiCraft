@@ -15,9 +15,9 @@
                     colors: {
                         'soft-blush': '#FFF0F5',
                         'fairy-pink': '#FFC0CB',
-                        'sakura-light': '#FFD1DC', // ชมพูพาสเทลอ่อน
-                        'champagne-gold': '#E7D2A9', // ทองอ่อนนุ่มๆ
-                        'dusty-rose': '#B784A7', // ชมพูตุ่นๆ สำหรับตัวอักษร
+                        'sakura-light': '#FFD1DC',
+                        'champagne-gold': '#E7D2A9',
+                        'dusty-rose': '#B784A7',
                     },
                     boxShadow: {
                         'glow': '0 0 20px rgba(255, 182, 193, 0.4)',
@@ -79,12 +79,23 @@
             66% { transform: translate(-5px, -10px) rotate(-1deg); }
         }
 
-        /* ตกแต่งชื่อเฉพาะ */
         .brand-name {
             background: linear-gradient(to bottom, #E7D2A9 0%, #B784A7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 1));
+        }
+
+        /* สำหรับสถานะโหลดข้อมูล */
+        .loading-dots:after {
+            content: '.';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+            40% { color: #B784A7; text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+            60% { text-shadow: .25em 0 0 #B784A7, .5em 0 0 rgba(0,0,0,0); }
+            80%, 100% { text-shadow: .25em 0 0 #B784A7, .5em 0 0 #B784A7; }
         }
     </style>
 </head>
@@ -98,7 +109,6 @@
 
     <main class="max-w-xl mx-auto space-y-12 relative z-20">
         
-        <!-- ส่วนหัว: ikumiCraft ปรับสีใหม่ -->
         <header class="text-center relative">
             <div class="mb-4 inline-block relative">
                 <div class="absolute inset-0 bg-sakura-light blur-3xl opacity-30 animate-pulse"></div>
@@ -111,7 +121,6 @@
             <p class="font-cute text-2xl text-dusty-rose/80">เนรมิตงานคราฟต์สุดหัวใจ เพื่อเจ้าหญิงทุกคน ✨</p>
         </header>
 
-        <!-- ส่วนเช็คคิว -->
         <section class="glass-princess dreamy-border p-8 relative overflow-hidden">
             <div class="absolute -top-2 -left-2 text-2xl opacity-60">✨</div>
             <div class="absolute -bottom-2 -right-2 text-2xl opacity-60">✨</div>
@@ -132,15 +141,14 @@
 
                 <div id="queueResult" class="hidden transition-all duration-500 transform origin-top">
                     <div class="bg-white/90 p-6 rounded-[40px] shadow-glow border-2 border-white flex items-center justify-between">
-                        <div id="resultContent"></div>
+                        <div id="resultContent" class="w-full"></div>
                     </div>
                 </div>
                 
-                <p class="text-center text-xs text-dusty-rose/60 font-light italic">ละอองเวทมนตร์อัปเดตงานทุกชั่วโมงค๊า ✨</p>
+                <p id="updateStatus" class="text-center text-xs text-dusty-rose/60 font-light italic loading-dots">กำลังเชื่อมต่อพลังเวทมนตร์เพื่อดึงข้อมูล</p>
             </div>
         </section>
 
-        <!-- บริการหลัก -->
         <div class="grid grid-cols-2 gap-6">
             <div class="glass-princess p-6 text-center hover:scale-105 transition-transform border-dashed border-white/50">
                 <span class="text-4xl block mb-2">🎀</span>
@@ -154,7 +162,6 @@
             </div>
         </div>
 
-        <!-- ท้ายหน้า -->
         <footer class="text-center space-y-6 pb-20">
             <div class="flex justify-center items-center gap-4">
                 <div class="h-[1px] w-12 bg-sakura-light"></div>
@@ -171,11 +178,23 @@
     </main>
 
     <script>
-        const queueData = [
-            { id: "1", name: "คุณหนูเอ", status: "เตรียมส่งงาน", icon: "🎁", color: "text-sakura-light" },
-            { id: "2", name: "คุณหนูบี", status: "กำลังคราฟต์งาน", icon: "🖌️", color: "text-dusty-rose" },
-            { id: "3", name: "คุณหนูซี", status: "รอคิวเลิศๆ", icon: "👑", color: "text-champagne-gold" }
-        ];
+        const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbyEA5QIas9nzc6m8QyE_k9fzPrqM-aIXoL5C95SUXSQwveOLOb_tfHuhJiZPTtfit9M/exec";
+        let queueData = [];
+
+        async function fetchQueueData() {
+            const statusEl = document.getElementById('updateStatus');
+            try {
+                const response = await fetch(SHEET_API_URL);
+                queueData = await response.json();
+                statusEl.classList.remove('loading-dots');
+                statusEl.innerText = "✨ ละอองเวทมนตร์อัปเดตงานล่าสุดแล้วค๊า ✨";
+            } catch (error) {
+                console.error("ดึงข้อมูลไม่สำเร็จ:", error);
+                statusEl.innerText = "❌ พลังเวทมนตร์ขัดข้อง กรุณารีเฟรชหน้าจออีกครั้งนะคะ";
+            }
+        }
+
+        fetchQueueData();
 
         function checkQueue() {
             const val = document.getElementById('queueInput').value.trim().toLowerCase();
@@ -184,23 +203,30 @@
             
             if(!val) return;
 
-            const item = queueData.find(q => q.id === val || q.name.toLowerCase().includes(val));
+            const item = queueData.find(q => 
+                (q.id && q.id.toLowerCase() === val) || 
+                (q.name && q.name.toLowerCase().includes(val))
+            );
 
             res.classList.remove('hidden');
             res.style.animation = "float-slow 3s infinite";
 
             if(item) {
+                let statusColor = "#B784A7";
+                if(item.status.includes("เสร็จ")) statusColor = "#88D8B0"; 
+                if(item.status.includes("คราฟต์") || item.status.includes("ทำ")) statusColor = "#FFB7CE";
+
                 content.innerHTML = `
-                    <div class="flex items-center gap-4">
-                        <div class="text-3xl">${item.icon}</div>
-                        <div>
-                            <p class="text-xs text-dusty-rose/60">คิวงานของคุณ ${item.name}</p>
-                            <p class="font-bold text-xl text-dusty-rose">${item.status}</p>
-                        </div>
+                    <div class="flex flex-col gap-1 w-full text-center">
+                        <p class="text-[10px] opacity-60 font-bold uppercase tracking-widest text-dusty-rose">Order ID: ${item.id || '-'}</p>
+                        <h3 class="font-bold text-lg text-dusty-rose">คุณ ${item.name}</h3>
+                        <div class="h-[1px] w-12 bg-sakura-light mx-auto my-1"></div>
+                        <p class="font-bold text-xl" style="color: ${statusColor}">${item.status}</p>
+                        <p class="text-xs italic mt-1 text-dusty-rose/80">✨ ${item.details || 'กำลังดำเนินการด้วยความใส่ใจค่ะ'}</p>
                     </div>
                 `;
             } else {
-                content.innerHTML = `<p class="text-center w-full text-dusty-rose/60 italic py-2">ขอประทานอภัย ไม่พบชื่อนี้ในวังค๊า 🥺</p>`;
+                content.innerHTML = `<p class="text-center w-full text-dusty-rose/60 italic py-2">ขอประทานอภัย ไม่พบข้อมูลในวังคราฟต์ค๊า 🥺</p>`;
             }
         }
     </script>
