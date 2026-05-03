@@ -15,11 +15,12 @@
                     colors: {
                         'soft-blush': '#FFF0F5',
                         'fairy-pink': '#FFC0CB',
-                        'hot-pink-pastel': '#FF69B4',
-                        'gold-shimmer': '#FFD700',
+                        'sakura-light': '#FFD1DC', // ชมพูพาสเทลอ่อน
+                        'champagne-gold': '#E7D2A9', // ทองอ่อนนุ่มๆ
+                        'dusty-rose': '#B784A7', // ชมพูตุ่นๆ สำหรับตัวอักษร
                     },
                     boxShadow: {
-                        'glow': '0 0 20px rgba(255, 182, 193, 0.6)',
+                        'glow': '0 0 20px rgba(255, 182, 193, 0.4)',
                         'inner-white': 'inset 0 0 15px rgba(255, 255, 255, 0.8)'
                     }
                 }
@@ -29,7 +30,7 @@
     <style>
         body {
             font-family: 'Mitr', sans-serif;
-            background: linear-gradient(180deg, #FFF0F5 0%, #FFDEF0 100%);
+            background: linear-gradient(180deg, #FFF5F7 0%, #FEEAF0 100%);
             min-height: 100vh;
             overflow-x: hidden;
             color: #8B5A6D;
@@ -38,7 +39,7 @@
         .misty-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 20%, rgba(255, 255, 255, 0.4) 100%);
+            background: radial-gradient(circle, transparent 20%, rgba(255, 255, 255, 0.5) 100%);
             pointer-events: none;
             z-index: 10;
         }
@@ -47,27 +48,28 @@
         .font-eng { font-family: 'Fredoka', sans-serif; }
 
         .glass-princess {
-            background: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 2px solid rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.8);
             border-radius: 50px;
-            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.3);
+            box-shadow: 0 15px 35px rgba(255, 192, 203, 0.2);
         }
 
         .dreamy-border {
-            border: 4px double rgba(255, 105, 180, 0.3);
+            border: 4px double rgba(231, 210, 169, 0.5);
         }
 
         .btn-sparkle {
-            background: linear-gradient(45deg, #FFB6C1, #FF69B4);
+            background: linear-gradient(45deg, #FFD1DC, #E7D2A9);
             border: 2px solid white;
-            box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+            box-shadow: 0 0 15px rgba(231, 210, 169, 0.3);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: #8B5A6D;
         }
         .btn-sparkle:hover {
             transform: scale(1.05) rotate(1deg);
-            box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
+            box-shadow: 0 0 25px rgba(255, 209, 220, 0.6);
         }
 
         .float-slow { animation: float-slow 6s ease-in-out infinite; }
@@ -76,12 +78,19 @@
             33% { transform: translate(5px, -15px) rotate(2deg); }
             66% { transform: translate(-5px, -10px) rotate(-1deg); }
         }
+
+        /* ตกแต่งชื่อเฉพาะ */
+        .brand-name {
+            background: linear-gradient(to bottom, #E7D2A9 0%, #B784A7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 1));
+        }
     </style>
 </head>
 <body class="py-10 px-4">
     <div class="misty-overlay"></div>
 
-    <!-- แบ็คกราวนด์ฟุ้งๆ -->
     <div class="fixed top-20 left-10 text-4xl float-slow opacity-50">☁️</div>
     <div class="fixed top-1/3 right-10 text-5xl float-slow opacity-40" style="animation-delay: 2s">✨</div>
     <div class="fixed bottom-20 left-1/4 text-4xl float-slow opacity-30" style="animation-delay: 4s">🌸</div>
@@ -89,45 +98,45 @@
 
     <main class="max-w-xl mx-auto space-y-12 relative z-20">
         
-        <!-- ส่วนหัว: ikumiCraft -->
+        <!-- ส่วนหัว: ikumiCraft ปรับสีใหม่ -->
         <header class="text-center relative">
             <div class="mb-4 inline-block relative">
-                <div class="absolute inset-0 bg-hot-pink-pastel blur-3xl opacity-20 animate-pulse"></div>
+                <div class="absolute inset-0 bg-sakura-light blur-3xl opacity-30 animate-pulse"></div>
                 <span class="text-6xl block mb-2 float-slow">🪄</span>
-                <h1 class="font-eng text-5xl md:text-6xl font-bold text-hot-pink-pastel drop-shadow-[0_2px_2px_rgba(255,255,255,1)]">
+                <h1 class="font-eng text-5xl md:text-6xl font-bold brand-name tracking-tight">
                     ikumiCraft
                 </h1>
-                <div class="h-1 w-32 bg-gradient-to-r from-transparent via-hot-pink-pastel to-transparent mx-auto mt-2"></div>
+                <div class="h-1 w-32 bg-gradient-to-r from-transparent via-champagne-gold to-transparent mx-auto mt-2"></div>
             </div>
-            <p class="font-cute text-2xl text-hot-pink-pastel/80">เนรมิตงานคราฟต์สุดหัวใจ เพื่อเจ้าหญิงทุกคน ✨</p>
+            <p class="font-cute text-2xl text-dusty-rose/80">เนรมิตงานคราฟต์สุดหัวใจ เพื่อเจ้าหญิงทุกคน ✨</p>
         </header>
 
         <!-- ส่วนเช็คคิว -->
         <section class="glass-princess dreamy-border p-8 relative overflow-hidden">
-            <div class="absolute -top-2 -left-2 text-2xl">✨</div>
-            <div class="absolute -bottom-2 -right-2 text-2xl">✨</div>
+            <div class="absolute -top-2 -left-2 text-2xl opacity-60">✨</div>
+            <div class="absolute -bottom-2 -right-2 text-2xl opacity-60">✨</div>
 
-            <h2 class="font-cute text-2xl text-center mb-6 text-hot-pink-pastel font-bold tracking-wide">
+            <h2 class="font-cute text-2xl text-center mb-6 text-dusty-rose font-bold tracking-wide">
                 💖 ตรวจสอบคิวงานคราฟต์ 💖
             </h2>
             
             <div class="space-y-5">
                 <div class="relative group">
                     <input type="text" id="queueInput" placeholder="พิมพ์ชื่อเล่น หรือ เลขออเดอร์..." 
-                           class="w-full px-8 py-5 rounded-full border-none focus:ring-4 focus:ring-fairy-pink bg-white/60 text-lg placeholder:text-pink-300 shadow-inner-white outline-none transition-all">
+                           class="w-full px-8 py-5 rounded-full border-none focus:ring-4 focus:ring-sakura-light bg-white/70 text-lg placeholder:text-pink-200 shadow-inner-white outline-none transition-all">
                     <button onclick="checkQueue()" 
-                            class="absolute right-2 top-2 btn-sparkle text-white px-8 py-3 rounded-full font-bold text-sm tracking-widest">
+                            class="absolute right-2 top-2 btn-sparkle px-8 py-3 rounded-full font-bold text-sm tracking-widest uppercase">
                         CHECK
                     </button>
                 </div>
 
                 <div id="queueResult" class="hidden transition-all duration-500 transform origin-top">
-                    <div class="bg-white/80 p-6 rounded-[40px] shadow-glow border-2 border-white flex items-center justify-between">
+                    <div class="bg-white/90 p-6 rounded-[40px] shadow-glow border-2 border-white flex items-center justify-between">
                         <div id="resultContent"></div>
                     </div>
                 </div>
                 
-                <p class="text-center text-xs text-pink-400/70 font-light italic">ละอองเวทมนตร์อัปเดตงานทุกชั่วโมงค๊า ✨</p>
+                <p class="text-center text-xs text-dusty-rose/60 font-light italic">ละอองเวทมนตร์อัปเดตงานทุกชั่วโมงค๊า ✨</p>
             </div>
         </section>
 
@@ -135,12 +144,12 @@
         <div class="grid grid-cols-2 gap-6">
             <div class="glass-princess p-6 text-center hover:scale-105 transition-transform border-dashed border-white/50">
                 <span class="text-4xl block mb-2">🎀</span>
-                <h3 class="font-bold text-hot-pink-pastel text-sm tracking-widest uppercase">Web Design</h3>
+                <h3 class="font-bold text-dusty-rose text-sm tracking-widest uppercase">Web Design</h3>
                 <p class="text-[10px] mt-1 opacity-70">ดีไซน์ละมุน ดั่งเวทมนตร์</p>
             </div>
             <div class="glass-princess p-6 text-center hover:scale-105 transition-transform border-dashed border-white/50">
                 <span class="text-4xl block mb-2">📒</span>
-                <h3 class="font-bold text-hot-pink-pastel text-sm tracking-widest uppercase">Digital Items</h3>
+                <h3 class="font-bold text-dusty-rose text-sm tracking-widest uppercase">Digital Items</h3>
                 <p class="text-[10px] mt-1 opacity-70">แอปและไฟล์งาน ราคาน่ารัก</p>
             </div>
         </div>
@@ -148,24 +157,24 @@
         <!-- ท้ายหน้า -->
         <footer class="text-center space-y-6 pb-20">
             <div class="flex justify-center items-center gap-4">
-                <div class="h-[1px] w-12 bg-pink-300"></div>
-                <p class="font-cute text-pink-400">เข้าเฝ้าเจ้าหญิงจูได้ที่</p>
-                <div class="h-[1px] w-12 bg-pink-300"></div>
+                <div class="h-[1px] w-12 bg-sakura-light"></div>
+                <p class="font-cute text-dusty-rose">เข้าเฝ้าเจ้าหญิงจูได้ที่</p>
+                <div class="h-[1px] w-12 bg-sakura-light"></div>
             </div>
             <div class="flex justify-center gap-6">
-                <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-white text-xl">f</a>
-                <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-white text-xl">ig</a>
-                <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-white text-xl">Line</a>
+                <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-xl">f</a>
+                <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-xl">ig</a>
+                <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-xl">Line</a>
             </div>
-            <p class="font-eng text-[10px] uppercase tracking-[0.3em] text-pink-300">Created with Magic by ikumiCraft</p>
+            <p class="font-eng text-[10px] uppercase tracking-[0.3em] text-dusty-rose/50">Created with Magic by ikumiCraft</p>
         </footer>
     </main>
 
     <script>
         const queueData = [
-            { id: "1", name: "คุณหนูเอ", status: "เตรียมส่งงาน", icon: "🎁", color: "text-pink-500" },
-            { id: "2", name: "คุณหนูบี", status: "กำลังคราฟต์งาน", icon: "🖌️", color: "text-hot-pink-pastel" },
-            { id: "3", name: "คุณหนูซี", status: "รอคิวเลิศๆ", icon: "👑", color: "text-yellow-500" }
+            { id: "1", name: "คุณหนูเอ", status: "เตรียมส่งงาน", icon: "🎁", color: "text-sakura-light" },
+            { id: "2", name: "คุณหนูบี", status: "กำลังคราฟต์งาน", icon: "🖌️", color: "text-dusty-rose" },
+            { id: "3", name: "คุณหนูซี", status: "รอคิวเลิศๆ", icon: "👑", color: "text-champagne-gold" }
         ];
 
         function checkQueue() {
@@ -185,13 +194,13 @@
                     <div class="flex items-center gap-4">
                         <div class="text-3xl">${item.icon}</div>
                         <div>
-                            <p class="text-xs text-pink-300">คิวงานของคุณ ${item.name}</p>
-                            <p class="font-bold text-xl ${item.color}">${item.status}</p>
+                            <p class="text-xs text-dusty-rose/60">คิวงานของคุณ ${item.name}</p>
+                            <p class="font-bold text-xl text-dusty-rose">${item.status}</p>
                         </div>
                     </div>
                 `;
             } else {
-                content.innerHTML = `<p class="text-center w-full text-pink-300 italic py-2">ขอประทานอภัย ไม่พบชื่อนี้ในวังค๊า 🥺</p>`;
+                content.innerHTML = `<p class="text-center w-full text-dusty-rose/60 italic py-2">ขอประทานอภัย ไม่พบชื่อนี้ในวังค๊า 🥺</p>`;
             }
         }
     </script>
