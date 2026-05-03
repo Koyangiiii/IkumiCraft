@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pinkjulieland - Floating Princess Dream</title>
+    <title>ikumiCraft - Floating Princess Dream</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Mitr:wght@300;400;500&family=Itim&display=swap" rel="stylesheet">
@@ -13,9 +13,9 @@
             theme: {
                 extend: {
                     colors: {
-                        'soft-blush': '#FFF0F5',   // ชมพูแก้มเด็ก
-                        'fairy-pink': '#FFC0CB',   // ชมพูแฟรี่
-                        'hot-pink-pastel': '#FF69B4', // ชมพูเด่นแต่หวาน
+                        'soft-blush': '#FFF0F5',
+                        'fairy-pink': '#FFC0CB',
+                        'hot-pink-pastel': '#FF69B4',
                         'gold-shimmer': '#FFD700',
                     },
                     boxShadow: {
@@ -30,12 +30,11 @@
         body {
             font-family: 'Mitr', sans-serif;
             background: linear-gradient(180deg, #FFF0F5 0%, #FFDEF0 100%);
-            min-height: 100 screen;
+            min-height: 100vh;
             overflow-x: hidden;
             color: #8B5A6D;
         }
 
-        /* เอฟเฟกต์ฟุ้งกระจาย */
         .misty-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -47,7 +46,6 @@
         .font-cute { font-family: 'Itim', cursive; }
         .font-eng { font-family: 'Fredoka', sans-serif; }
 
-        /* การ์ดแบบฟุ้งกระจาย */
         .glass-princess {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(12px);
@@ -61,7 +59,6 @@
             border: 4px double rgba(255, 105, 180, 0.3);
         }
 
-        /* ปุ่มวิ้งค์ๆ */
         .btn-sparkle {
             background: linear-gradient(45deg, #FFB6C1, #FF69B4);
             border: 2px solid white;
@@ -73,20 +70,11 @@
             box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
         }
 
-        /* อนิเมชั่นลอยฝันๆ */
         .float-slow { animation: float-slow 6s ease-in-out infinite; }
         @keyframes float-slow {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
             33% { transform: translate(5px, -15px) rotate(2deg); }
             66% { transform: translate(-5px, -10px) rotate(-1deg); }
-        }
-
-        .sparkle-animate {
-            animation: sparkle-blink 2s infinite;
-        }
-        @keyframes sparkle-blink {
-            0%, 100% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1.2); }
         }
     </style>
 </head>
@@ -101,27 +89,26 @@
 
     <main class="max-w-xl mx-auto space-y-12 relative z-20">
         
-        <!-- ส่วนหัว: ปราสาทและชื่อร้าน -->
+        <!-- ส่วนหัว: ikumiCraft -->
         <header class="text-center relative">
             <div class="mb-4 inline-block relative">
                 <div class="absolute inset-0 bg-hot-pink-pastel blur-3xl opacity-20 animate-pulse"></div>
-                <span class="text-6xl block mb-2 float-slow">🏰</span>
+                <span class="text-6xl block mb-2 float-slow">🪄</span>
                 <h1 class="font-eng text-5xl md:text-6xl font-bold text-hot-pink-pastel drop-shadow-[0_2px_2px_rgba(255,255,255,1)]">
-                    Pinkjulieland
+                    ikumiCraft
                 </h1>
                 <div class="h-1 w-32 bg-gradient-to-r from-transparent via-hot-pink-pastel to-transparent mx-auto mt-2"></div>
             </div>
-            <p class="font-cute text-2xl text-hot-pink-pastel/80">ยินดีต้อนรับสู่พระราชวังดิจิทัลค๊า ✨</p>
+            <p class="font-cute text-2xl text-hot-pink-pastel/80">เนรมิตงานคราฟต์สุดหัวใจ เพื่อเจ้าหญิงทุกคน ✨</p>
         </header>
 
-        <!-- ส่วนเช็คคิว: ดีไซน์ฟุ้งๆ -->
+        <!-- ส่วนเช็คคิว -->
         <section class="glass-princess dreamy-border p-8 relative overflow-hidden">
-            <!-- ตกแต่งมุมการ์ด -->
             <div class="absolute -top-2 -left-2 text-2xl">✨</div>
             <div class="absolute -bottom-2 -right-2 text-2xl">✨</div>
 
             <h2 class="font-cute text-2xl text-center mb-6 text-hot-pink-pastel font-bold tracking-wide">
-                💖 ตรวจสอบสถานะเจ้าหญิง 💖
+                💖 ตรวจสอบคิวงานคราฟต์ 💖
             </h2>
             
             <div class="space-y-5">
@@ -135,13 +122,12 @@
                 </div>
 
                 <div id="queueResult" class="hidden transition-all duration-500 transform origin-top">
-                    <!-- ผลลัพธ์จะแสดงในรูปแบบแผ่นเมฆนุ่มๆ -->
                     <div class="bg-white/80 p-6 rounded-[40px] shadow-glow border-2 border-white flex items-center justify-between">
                         <div id="resultContent"></div>
                     </div>
                 </div>
                 
-                <p class="text-center text-xs text-pink-400/70 font-light italic">ละอองเวทมนตร์อัปเดตทุกชั่วโมงค๊า ✨</p>
+                <p class="text-center text-xs text-pink-400/70 font-light italic">ละอองเวทมนตร์อัปเดตงานทุกชั่วโมงค๊า ✨</p>
             </div>
         </section>
 
@@ -149,13 +135,13 @@
         <div class="grid grid-cols-2 gap-6">
             <div class="glass-princess p-6 text-center hover:scale-105 transition-transform border-dashed border-white/50">
                 <span class="text-4xl block mb-2">🎀</span>
-                <h3 class="font-bold text-hot-pink-pastel text-sm">รับทำเว็บไซต์</h3>
-                <p class="text-[10px] mt-1 opacity-70">เนรมิตหน้าเว็บให้สวยดั่งฝัน</p>
+                <h3 class="font-bold text-hot-pink-pastel text-sm tracking-widest uppercase">Web Design</h3>
+                <p class="text-[10px] mt-1 opacity-70">ดีไซน์ละมุน ดั่งเวทมนตร์</p>
             </div>
             <div class="glass-princess p-6 text-center hover:scale-105 transition-transform border-dashed border-white/50">
                 <span class="text-4xl block mb-2">📒</span>
-                <h3 class="font-bold text-hot-pink-pastel text-sm">Goodnote</h3>
-                <p class="text-[10px] mt-1 opacity-70">แอปเขียนลื่น สบายตา</p>
+                <h3 class="font-bold text-hot-pink-pastel text-sm tracking-widest uppercase">Digital Items</h3>
+                <p class="text-[10px] mt-1 opacity-70">แอปและไฟล์งาน ราคาน่ารัก</p>
             </div>
         </div>
 
@@ -171,15 +157,14 @@
                 <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-white text-xl">ig</a>
                 <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-white text-xl">Line</a>
             </div>
-            <p class="font-eng text-[10px] uppercase tracking-[0.3em] text-pink-300">Created with Magic by PJL</p>
+            <p class="font-eng text-[10px] uppercase tracking-[0.3em] text-pink-300">Created with Magic by ikumiCraft</p>
         </footer>
     </main>
 
     <script>
-        // ข้อมูลจำลอง
         const queueData = [
             { id: "1", name: "คุณหนูเอ", status: "เตรียมส่งงาน", icon: "🎁", color: "text-pink-500" },
-            { id: "2", name: "คุณหนูบี", status: "กำลังลงสี", icon: "🖌️", color: "text-hot-pink-pastel" },
+            { id: "2", name: "คุณหนูบี", status: "กำลังคราฟต์งาน", icon: "🖌️", color: "text-hot-pink-pastel" },
             { id: "3", name: "คุณหนูซี", status: "รอคิวเลิศๆ", icon: "👑", color: "text-yellow-500" }
         ];
 
@@ -200,7 +185,7 @@
                     <div class="flex items-center gap-4">
                         <div class="text-3xl">${item.icon}</div>
                         <div>
-                            <p class="text-xs text-pink-300">คิวของ ${item.name}</p>
+                            <p class="text-xs text-pink-300">คิวงานของคุณ ${item.name}</p>
                             <p class="font-bold text-xl ${item.color}">${item.status}</p>
                         </div>
                     </div>
