@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pinkjulieland - Princess Dream</title>
+    <title>Pinkjulieland - Floating Princess Dream</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Mitr:wght@300;400;500&family=Itim&display=swap" rel="stylesheet">
@@ -13,15 +13,14 @@
             theme: {
                 extend: {
                     colors: {
-                        'princess-pink': '#FFD1E3', // ชมพูอ่อนละมุน
-                        'magic-pink': '#FF85B3',    // ชมพูเข้มสดใส
-                        'dream-purple': '#9370DB',  // ม่วงอ่อนฝันๆ
-                        'royal-cream': '#FFF5F8',   // ขาวอมชมพู
-                        'tiara-gold': '#F3C623'     // ทองมงกุฎ
+                        'soft-blush': '#FFF0F5',   // ชมพูแก้มเด็ก
+                        'fairy-pink': '#FFC0CB',   // ชมพูแฟรี่
+                        'hot-pink-pastel': '#FF69B4', // ชมพูเด่นแต่หวาน
+                        'gold-shimmer': '#FFD700',
                     },
                     boxShadow: {
-                        'soft': '0 8px 25px rgba(255, 133, 179, 0.25)',
-                        'inner-glow': 'inset 0 2px 4px rgba(255, 255, 255, 0.5)'
+                        'glow': '0 0 20px rgba(255, 182, 193, 0.6)',
+                        'inner-white': 'inset 0 0 15px rgba(255, 255, 255, 0.8)'
                     }
                 }
             }
@@ -30,172 +29,184 @@
     <style>
         body {
             font-family: 'Mitr', sans-serif;
-            background-color: #FFF5F8;
-            background-image: 
-                radial-gradient(circle at 20% 20%, rgba(255, 209, 227, 0.4) 0%, transparent 25%),
-                radial-gradient(circle at 80% 80%, rgba(255, 209, 227, 0.4) 0%, transparent 25%);
-            color: #7A4D5F;
+            background: linear-gradient(180deg, #FFF0F5 0%, #FFDEF0 100%);
+            min-height: 100 screen;
+            overflow-x: hidden;
+            color: #8B5A6D;
         }
-        
+
+        /* เอฟเฟกต์ฟุ้งกระจาย */
+        .misty-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 20%, rgba(255, 255, 255, 0.4) 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
         .font-cute { font-family: 'Itim', cursive; }
         .font-eng { font-family: 'Fredoka', sans-serif; }
 
-        .princess-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(8px);
-            border: 3px solid #FFD1E3;
-            border-radius: 40px;
-            box-shadow: 0 10px 20px rgba(255, 133, 179, 0.1);
+        /* การ์ดแบบฟุ้งกระจาย */
+        .glass-princess {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 50px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.3);
         }
 
-        .btn-gradient {
-            background: linear-gradient(135deg, #FFB6C1 0%, #FF85B3 100%);
-            transition: all 0.3s ease;
-        }
-        .btn-gradient:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 5px 15px rgba(255, 133, 179, 0.4);
+        .dreamy-border {
+            border: 4px double rgba(255, 105, 180, 0.3);
         }
 
-        .floating {
-            animation: float 3s ease-in-out infinite;
+        /* ปุ่มวิ้งค์ๆ */
+        .btn-sparkle {
+            background: linear-gradient(45deg, #FFB6C1, #FF69B4);
+            border: 2px solid white;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .btn-sparkle:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
         }
 
-        .sparkle {
-            position: absolute;
-            pointer-events: none;
-            animation: blink 2s infinite;
+        /* อนิเมชั่นลอยฝันๆ */
+        .float-slow { animation: float-slow 6s ease-in-out infinite; }
+        @keyframes float-slow {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(5px, -15px) rotate(2deg); }
+            66% { transform: translate(-5px, -10px) rotate(-1deg); }
         }
-        @keyframes blink {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
+
+        .sparkle-animate {
+            animation: sparkle-blink 2s infinite;
+        }
+        @keyframes sparkle-blink {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
             50% { opacity: 1; transform: scale(1.2); }
         }
     </style>
 </head>
-<body class="min-h-screen py-8 px-4 overflow-x-hidden">
+<body class="py-10 px-4">
+    <div class="misty-overlay"></div>
 
-    <!-- Elements ตกแต่ง -->
-    <div class="fixed top-10 left-[10%] text-3xl floating opacity-40">💖</div>
-    <div class="fixed top-40 right-[5%] text-4xl floating opacity-30" style="animation-delay: 1s">✨</div>
-    <div class="fixed bottom-20 left-[5%] text-3xl floating opacity-40" style="animation-delay: 1.5s">🌸</div>
-    <div class="fixed bottom-10 right-[10%] text-4xl floating opacity-30">🎀</div>
+    <!-- แบ็คกราวนด์ฟุ้งๆ -->
+    <div class="fixed top-20 left-10 text-4xl float-slow opacity-50">☁️</div>
+    <div class="fixed top-1/3 right-10 text-5xl float-slow opacity-40" style="animation-delay: 2s">✨</div>
+    <div class="fixed bottom-20 left-1/4 text-4xl float-slow opacity-30" style="animation-delay: 4s">🌸</div>
+    <div class="fixed bottom-10 right-5 text-4xl float-slow opacity-50">🦢</div>
 
-    <main class="max-w-2xl mx-auto space-y-8 relative">
+    <main class="max-w-xl mx-auto space-y-12 relative z-20">
         
-        <!-- Header Section -->
-        <header class="text-center relative py-6">
-            <div class="relative inline-block">
-                <span class="absolute -top-10 left-1/2 -translate-x-1/2 text-5xl floating">👑</span>
-                <h1 class="font-eng text-5xl md:text-6xl font-bold text-magic-pink drop-shadow-sm tracking-tight">
+        <!-- ส่วนหัว: ปราสาทและชื่อร้าน -->
+        <header class="text-center relative">
+            <div class="mb-4 inline-block relative">
+                <div class="absolute inset-0 bg-hot-pink-pastel blur-3xl opacity-20 animate-pulse"></div>
+                <span class="text-6xl block mb-2 float-slow">🏰</span>
+                <h1 class="font-eng text-5xl md:text-6xl font-bold text-hot-pink-pastel drop-shadow-[0_2px_2px_rgba(255,255,255,1)]">
                     Pinkjulieland
                 </h1>
+                <div class="h-1 w-32 bg-gradient-to-r from-transparent via-hot-pink-pastel to-transparent mx-auto mt-2"></div>
             </div>
-            <p class="font-cute text-xl text-magic-pink mt-2">✨ ดินแดนแห่งความฝันของเจ้าหญิงคนเก่ง ✨</p>
-            
-            <div class="mt-6 princess-card p-4 inline-block border-dashed">
-                <p class="text-lg">
-                    รับทำเว็บไซต์ & แอป Goodnote <br>
-                    <span class="text-2xl font-bold text-magic-pink">เริ่มต้นเพียง 20.-</span>
-                </p>
-            </div>
+            <p class="font-cute text-2xl text-hot-pink-pastel/80">ยินดีต้อนรับสู่พระราชวังดิจิทัลค๊า ✨</p>
         </header>
 
-        <!-- Queue Checker (ระบบเช็คคิว) -->
-        <section class="princess-card p-6 md:p-8 border-magic-pink/30">
-            <h2 class="font-cute text-2xl text-magic-pink font-bold text-center mb-6 flex items-center justify-center gap-2">
-                🎀 ตรวจสอบคิวเจ้าหญิง 🎀
+        <!-- ส่วนเช็คคิว: ดีไซน์ฟุ้งๆ -->
+        <section class="glass-princess dreamy-border p-8 relative overflow-hidden">
+            <!-- ตกแต่งมุมการ์ด -->
+            <div class="absolute -top-2 -left-2 text-2xl">✨</div>
+            <div class="absolute -bottom-2 -right-2 text-2xl">✨</div>
+
+            <h2 class="font-cute text-2xl text-center mb-6 text-hot-pink-pastel font-bold tracking-wide">
+                💖 ตรวจสอบสถานะเจ้าหญิง 💖
             </h2>
             
-            <div class="space-y-4">
-                <div class="relative">
-                    <input type="text" id="queueInput" placeholder="กรอกชื่อ หรือ รหัสออเดอร์..." 
-                           class="w-full px-6 py-4 rounded-full border-2 border-princess-pink focus:outline-none focus:border-magic-pink bg-white/80 shadow-inner">
+            <div class="space-y-5">
+                <div class="relative group">
+                    <input type="text" id="queueInput" placeholder="พิมพ์ชื่อเล่น หรือ เลขออเดอร์..." 
+                           class="w-full px-8 py-5 rounded-full border-none focus:ring-4 focus:ring-fairy-pink bg-white/60 text-lg placeholder:text-pink-300 shadow-inner-white outline-none transition-all">
                     <button onclick="checkQueue()" 
-                            class="absolute right-2 top-2 btn-gradient text-white px-6 py-2 rounded-full font-bold shadow-md">
-                        เช็คเลย
+                            class="absolute right-2 top-2 btn-sparkle text-white px-8 py-3 rounded-full font-bold text-sm tracking-widest">
+                        CHECK
                     </button>
                 </div>
 
-                <!-- พื้นที่แสดงผล -->
-                <div id="queueResult" class="hidden animate-bounce-short p-5 bg-white/90 rounded-3xl border-2 border-dashed border-princess-pink mt-4">
-                    <!-- ข้อมูลจะแสดงตรงนี้ -->
+                <div id="queueResult" class="hidden transition-all duration-500 transform origin-top">
+                    <!-- ผลลัพธ์จะแสดงในรูปแบบแผ่นเมฆนุ่มๆ -->
+                    <div class="bg-white/80 p-6 rounded-[40px] shadow-glow border-2 border-white flex items-center justify-between">
+                        <div id="resultContent"></div>
+                    </div>
                 </div>
-
-                <p class="text-[11px] text-center text-magic-pink/60 italic">* อัพเดทข้อมูลทุกๆ 1 ชั่วโมงนะคะเจ้าหญิง</p>
+                
+                <p class="text-center text-xs text-pink-400/70 font-light italic">ละอองเวทมนตร์อัปเดตทุกชั่วโมงค๊า ✨</p>
             </div>
         </section>
 
-        <!-- Services Section -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="princess-card p-5 text-center hover:bg-white transition-colors cursor-default">
-                <div class="text-3xl mb-2">💻</div>
-                <h3 class="font-bold text-magic-pink">รับทำเว็บไซต์</h3>
-                <p class="text-sm">เรทราคา, พรีเมียม, <br>และหน้าเดียวจบ!</p>
+        <!-- บริการหลัก -->
+        <div class="grid grid-cols-2 gap-6">
+            <div class="glass-princess p-6 text-center hover:scale-105 transition-transform border-dashed border-white/50">
+                <span class="text-4xl block mb-2">🎀</span>
+                <h3 class="font-bold text-hot-pink-pastel text-sm">รับทำเว็บไซต์</h3>
+                <p class="text-[10px] mt-1 opacity-70">เนรมิตหน้าเว็บให้สวยดั่งฝัน</p>
             </div>
-            <div class="princess-card p-5 text-center hover:bg-white transition-colors cursor-default">
-                <div class="text-3xl mb-2">📝</div>
-                <h3 class="font-bold text-magic-pink">แอป Goodnote</h3>
-                <p class="text-sm">ถาวร, รายปี <br>มีทั้งเมลรวมและส่วนตัว</p>
+            <div class="glass-princess p-6 text-center hover:scale-105 transition-transform border-dashed border-white/50">
+                <span class="text-4xl block mb-2">📒</span>
+                <h3 class="font-bold text-hot-pink-pastel text-sm">Goodnote</h3>
+                <p class="text-[10px] mt-1 opacity-70">แอปเขียนลื่น สบายตา</p>
             </div>
-        </section>
+        </div>
 
-        <!-- Contact Footer -->
-        <footer class="text-center space-y-4 pb-10">
-            <p class="font-cute text-lg">— ติดต่อสอบถามเจ้าหญิงจูได้ที่ —</p>
-            <div class="flex justify-center gap-5">
-                <a href="#" class="w-14 h-14 princess-card flex items-center justify-center text-2xl hover:scale-110 transition-transform bg-white">FB</a>
-                <a href="#" class="w-14 h-14 princess-card flex items-center justify-center text-2xl hover:scale-110 transition-transform bg-white">IG</a>
-                <a href="#" class="w-14 h-14 princess-card flex items-center justify-center text-2xl hover:scale-110 transition-transform bg-white">Line</a>
+        <!-- ท้ายหน้า -->
+        <footer class="text-center space-y-6 pb-20">
+            <div class="flex justify-center items-center gap-4">
+                <div class="h-[1px] w-12 bg-pink-300"></div>
+                <p class="font-cute text-pink-400">เข้าเฝ้าเจ้าหญิงจูได้ที่</p>
+                <div class="h-[1px] w-12 bg-pink-300"></div>
             </div>
-            <p class="text-xs text-magic-pink/50 font-eng">© 2026 Pinkjulieland. All Rights Reserved.</p>
+            <div class="flex justify-center gap-6">
+                <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-white text-xl">f</a>
+                <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-white text-xl">ig</a>
+                <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-white text-xl">Line</a>
+            </div>
+            <p class="font-eng text-[10px] uppercase tracking-[0.3em] text-pink-300">Created with Magic by PJL</p>
         </footer>
-
     </main>
 
     <script>
-        // ข้อมูลจำลอง (จำลองว่าดึงมาจากหลังบ้าน)
+        // ข้อมูลจำลอง
         const queueData = [
-            { id: "001", name: "คุณสโนว์", status: "กำลังทำ", icon: "🎨", color: "text-orange-400" },
-            { id: "002", name: "คุณซินเดอเรลล่า", status: "เสร็จแล้ว", icon: "✅", color: "text-green-500" },
-            { id: "003", name: "คุณเบลล์", status: "รอคิว", icon: "⏳", color: "text-blue-400" }
+            { id: "1", name: "คุณหนูเอ", status: "เตรียมส่งงาน", icon: "🎁", color: "text-pink-500" },
+            { id: "2", name: "คุณหนูบี", status: "กำลังลงสี", icon: "🖌️", color: "text-hot-pink-pastel" },
+            { id: "3", name: "คุณหนูซี", status: "รอคิวเลิศๆ", icon: "👑", color: "text-yellow-500" }
         ];
 
         function checkQueue() {
-            const input = document.getElementById('queueInput').value.trim().toLowerCase();
-            const resultDiv = document.getElementById('queueResult');
+            const val = document.getElementById('queueInput').value.trim().toLowerCase();
+            const res = document.getElementById('queueResult');
+            const content = document.getElementById('resultContent');
             
-            if (!input) return;
+            if(!val) return;
 
-            const found = queueData.find(q => 
-                q.id.toLowerCase().includes(input) || 
-                q.name.toLowerCase().includes(input)
-            );
+            const item = queueData.find(q => q.id === val || q.name.toLowerCase().includes(val));
 
-            resultDiv.classList.remove('hidden');
-            
-            if (found) {
-                resultDiv.innerHTML = `
-                    <div class="flex items-center justify-between">
+            res.classList.remove('hidden');
+            res.style.animation = "float-slow 3s infinite";
+
+            if(item) {
+                content.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <div class="text-3xl">${item.icon}</div>
                         <div>
-                            <span class="text-[10px] bg-princess-pink px-2 py-0.5 rounded-full font-bold">ID: ${found.id}</span>
-                            <h3 class="font-bold text-lg mt-1">${found.name}</h3>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-2xl">${found.icon}</span>
-                            <p class="font-bold ${found.color}">${found.status}</p>
+                            <p class="text-xs text-pink-300">คิวของ ${item.name}</p>
+                            <p class="font-bold text-xl ${item.color}">${item.status}</p>
                         </div>
                     </div>
                 `;
             } else {
-                resultDiv.innerHTML = `
-                    <div class="text-center py-2">
-                        <p class="text-gray-400">ยังไม่พบคิวของเจ้าหญิงเลยค่ะ <br>ลองเช็คชื่อ/รหัสอีกครั้งนะค๊า</p>
-                    </div>
-                `;
+                content.innerHTML = `<p class="text-center w-full text-pink-300 italic py-2">ขอประทานอภัย ไม่พบชื่อนี้ในวังค๊า 🥺</p>`;
             }
         }
     </script>
