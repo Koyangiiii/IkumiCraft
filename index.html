@@ -52,7 +52,7 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 2px solid rgba(255, 255, 255, 0.8);
-            border-radius: 50px;
+            border-radius: 40px;
             box-shadow: 0 15px 35px rgba(255, 192, 203, 0.2);
         }
 
@@ -64,12 +64,7 @@
             background: linear-gradient(45deg, #FFD1DC, #E7D2A9);
             border: 2px solid white;
             box-shadow: 0 0 15px rgba(231, 210, 169, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             color: #8B5A6D;
-        }
-        .btn-sparkle:hover {
-            transform: scale(1.05) rotate(1deg);
-            box-shadow: 0 0 25px rgba(255, 209, 220, 0.6);
         }
 
         .float-slow { animation: float-slow 6s ease-in-out infinite; }
@@ -86,16 +81,12 @@
             filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 1));
         }
 
-        /* สำหรับสถานะโหลดข้อมูล */
-        .loading-dots:after {
-            content: '.';
-            animation: dots 1.5s steps(5, end) infinite;
-        }
-        @keyframes dots {
-            0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
-            40% { color: #B784A7; text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
-            60% { text-shadow: .25em 0 0 #B784A7, .5em 0 0 rgba(0,0,0,0); }
-            80%, 100% { text-shadow: .25em 0 0 #B784A7, .5em 0 0 #B784A7; }
+        .queue-card {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #FFD1DC;
         }
     </style>
 </head>
@@ -107,7 +98,7 @@
     <div class="fixed bottom-20 left-1/4 text-4xl float-slow opacity-30" style="animation-delay: 4s">🌸</div>
     <div class="fixed bottom-10 right-5 text-4xl float-slow opacity-50">🦢</div>
 
-    <main class="max-w-xl mx-auto space-y-12 relative z-20">
+    <main class="max-w-xl mx-auto space-y-8 relative z-20">
         
         <header class="text-center relative">
             <div class="mb-4 inline-block relative">
@@ -118,117 +109,84 @@
                 </h1>
                 <div class="h-1 w-32 bg-gradient-to-r from-transparent via-champagne-gold to-transparent mx-auto mt-2"></div>
             </div>
-            <p class="font-cute text-2xl text-dusty-rose/80">เนรมิตงานคราฟต์สุดหัวใจ เพื่อเจ้าหญิงทุกคน ✨</p>
+            <p class="font-cute text-2xl text-dusty-rose/80">ตารางคิวงานคราฟต์เจ้าหญิง ✨</p>
         </header>
 
-        <section class="glass-princess dreamy-border p-8 relative overflow-hidden">
-            <div class="absolute -top-2 -left-2 text-2xl opacity-60">✨</div>
-            <div class="absolute -bottom-2 -right-2 text-2xl opacity-60">✨</div>
-
-            <h2 class="font-cute text-2xl text-center mb-6 text-dusty-rose font-bold tracking-wide">
-                💖 ตรวจสอบคิวงานคราฟต์ 💖
-            </h2>
+        <section class="glass-princess dreamy-border p-6 relative overflow-hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="font-cute text-2xl text-dusty-rose font-bold">💖 คิวงานทั้งหมด 💖</h2>
+                <span id="queueCount" class="text-xs bg-fairy-pink px-3 py-1 rounded-full text-white">...</span>
+            </div>
             
-            <div class="space-y-5">
-                <div class="relative group">
-                    <input type="text" id="queueInput" placeholder="พิมพ์ชื่อเล่น หรือ เลขออเดอร์..." 
-                           class="w-full px-8 py-5 rounded-full border-none focus:ring-4 focus:ring-sakura-light bg-white/70 text-lg placeholder:text-pink-200 shadow-inner-white outline-none transition-all">
-                    <button onclick="checkQueue()" 
-                            class="absolute right-2 top-2 btn-sparkle px-8 py-3 rounded-full font-bold text-sm tracking-widest uppercase">
-                        CHECK
-                    </button>
-                </div>
-
-                <div id="queueResult" class="hidden transition-all duration-500 transform origin-top">
-                    <div class="bg-white/90 p-6 rounded-[40px] shadow-glow border-2 border-white flex items-center justify-between">
-                        <div id="resultContent" class="w-full"></div>
-                    </div>
-                </div>
-                
-                <p id="updateStatus" class="text-center text-xs text-dusty-rose/60 font-light italic loading-dots">กำลังเชื่อมต่อพลังเวทมนตร์เพื่อดึงข้อมูล</p>
+            <div id="queueList" class="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+                <p id="loadingText" class="text-center text-dusty-rose/60 italic">กำลังโหลดคิวงาน...</p>
             </div>
         </section>
 
-        <div class="grid grid-cols-2 gap-6">
-            <div class="glass-princess p-6 text-center hover:scale-105 transition-transform border-dashed border-white/50">
-                <span class="text-4xl block mb-2">🎀</span>
-                <h3 class="font-bold text-dusty-rose text-sm tracking-widest uppercase">Web Design</h3>
-                <p class="text-[10px] mt-1 opacity-70">ดีไซน์ละมุน ดั่งเวทมนตร์</p>
-            </div>
-            <div class="glass-princess p-6 text-center hover:scale-105 transition-transform border-dashed border-white/50">
-                <span class="text-4xl block mb-2">📒</span>
-                <h3 class="font-bold text-dusty-rose text-sm tracking-widest uppercase">Digital Items</h3>
-                <p class="text-[10px] mt-1 opacity-70">แอปและไฟล์งาน ราคาน่ารัก</p>
-            </div>
-        </div>
-
-        <footer class="text-center space-y-6 pb-20">
+        <footer class="text-center space-y-6 pb-10">
             <div class="flex justify-center items-center gap-4">
                 <div class="h-[1px] w-12 bg-sakura-light"></div>
-                <p class="font-cute text-dusty-rose">เข้าเฝ้าเจ้าหญิงจูได้ที่</p>
+                <p class="font-cute text-dusty-rose">ติดต่อเจ้าหญิงจูได้ที่</p>
                 <div class="h-[1px] w-12 bg-sakura-light"></div>
             </div>
             <div class="flex justify-center gap-6">
-                <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-xl">f</a>
-                <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-xl">ig</a>
-                <a href="#" class="btn-sparkle w-14 h-14 rounded-full flex items-center justify-center text-xl">Line</a>
+                <a href="#" class="btn-sparkle w-12 h-12 rounded-full flex items-center justify-center text-lg">f</a>
+                <a href="#" class="btn-sparkle w-12 h-12 rounded-full flex items-center justify-center text-lg">ig</a>
+                <a href="#" class="btn-sparkle w-12 h-12 rounded-full flex items-center justify-center text-lg">Line</a>
             </div>
-            <p class="font-eng text-[10px] uppercase tracking-[0.3em] text-dusty-rose/50">Created with Magic by ikumiCraft</p>
+            <p class="font-eng text-[8px] uppercase tracking-[0.3em] text-dusty-rose/50">Created with Magic by ikumiCraft</p>
         </footer>
     </main>
 
     <script>
         const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbyEA5QIas9nzc6m8QyE_k9fzPrqM-aIXoL5C95SUXSQwveOLOb_tfHuhJiZPTtfit9M/exec";
-        let queueData = [];
 
         async function fetchQueueData() {
-            const statusEl = document.getElementById('updateStatus');
+            const queueList = document.getElementById('queueList');
+            const countEl = document.getElementById('queueCount');
+
             try {
                 const response = await fetch(SHEET_API_URL);
-                queueData = await response.json();
-                statusEl.classList.remove('loading-dots');
-                statusEl.innerText = "✨ ละอองเวทมนตร์อัปเดตงานล่าสุดแล้วค๊า ✨";
+                const queueData = await response.json();
+                
+                queueList.innerHTML = "";
+                countEl.innerText = `${queueData.length} คิว`;
+
+                if (queueData.length === 0) {
+                    queueList.innerHTML = `<p class="text-center text-dusty-rose/50 py-10">ยังไม่มีคิวงานค๊า 🌸</p>`;
+                    return;
+                }
+
+                queueData.forEach((item, index) => {
+                    let statusColor = "#B784A7";
+                    if(item.status.includes("เสร็จ")) statusColor = "#4CAF50";
+                    else if(item.status.includes("คราฟต์") || item.status.includes("ทำ")) statusColor = "#FF69B4";
+
+                    const card = document.createElement('div');
+                    card.className = "queue-card shadow-sm border-l-4";
+                    card.style.borderLeftColor = statusColor;
+
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-[9px] uppercase text-dusty-rose/60">ID: ${item.id || (index+1)}</p>
+                                <h3 class="font-bold text-dusty-rose text-lg">คุณ ${item.name}</h3>
+                            </div>
+                            <span class="text-[10px] font-bold px-3 py-1 rounded-full border" style="color: ${statusColor}; border-color: ${statusColor}">
+                                ${item.status}
+                            </span>
+                        </div>
+                        <div class="mt-2 pt-2 border-t border-dashed border-dusty-rose/10">
+                            <p class="text-xs italic text-dusty-rose/80">✨ ${item.details || 'กำลังดำเนินการค่ะ'}</p>
+                        </div>
+                    `;
+                    queueList.appendChild(card);
+                });
             } catch (error) {
-                console.error("ดึงข้อมูลไม่สำเร็จ:", error);
-                statusEl.innerText = "❌ พลังเวทมนตร์ขัดข้อง กรุณารีเฟรชหน้าจออีกครั้งนะคะ";
+                queueList.innerHTML = `<p class="text-center text-red-400 py-10">ไม่สามารถเชื่อมต่อข้อมูลได้</p>`;
             }
         }
-
         fetchQueueData();
-
-        function checkQueue() {
-            const val = document.getElementById('queueInput').value.trim().toLowerCase();
-            const res = document.getElementById('queueResult');
-            const content = document.getElementById('resultContent');
-            
-            if(!val) return;
-
-            const item = queueData.find(q => 
-                (q.id && q.id.toLowerCase() === val) || 
-                (q.name && q.name.toLowerCase().includes(val))
-            );
-
-            res.classList.remove('hidden');
-            res.style.animation = "float-slow 3s infinite";
-
-            if(item) {
-                let statusColor = "#B784A7";
-                if(item.status.includes("เสร็จ")) statusColor = "#88D8B0"; 
-                if(item.status.includes("คราฟต์") || item.status.includes("ทำ")) statusColor = "#FFB7CE";
-
-                content.innerHTML = `
-                    <div class="flex flex-col gap-1 w-full text-center">
-                        <p class="text-[10px] opacity-60 font-bold uppercase tracking-widest text-dusty-rose">Order ID: ${item.id || '-'}</p>
-                        <h3 class="font-bold text-lg text-dusty-rose">คุณ ${item.name}</h3>
-                        <div class="h-[1px] w-12 bg-sakura-light mx-auto my-1"></div>
-                        <p class="font-bold text-xl" style="color: ${statusColor}">${item.status}</p>
-                        <p class="text-xs italic mt-1 text-dusty-rose/80">✨ ${item.details || 'กำลังดำเนินการด้วยความใส่ใจค่ะ'}</p>
-                    </div>
-                `;
-            } else {
-                content.innerHTML = `<p class="text-center w-full text-dusty-rose/60 italic py-2">ขอประทานอภัย ไม่พบข้อมูลในวังคราฟต์ค๊า 🥺</p>`;
-            }
-        }
     </script>
 </body>
 </html>
